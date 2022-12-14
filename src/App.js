@@ -13,7 +13,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Users/>}/>
-          <Route path='/:userId/places'><UsersPlaces/></Route>
+          <Route path='/:userId/places' element={<UsersPlaces/>}></Route>
           <Route path='/places/new' element={<NewPlace/>}/>
           <Route path='*' element={<Navigate replace to="/" />}/>
         </Routes>
