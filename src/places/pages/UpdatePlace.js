@@ -7,6 +7,7 @@ import Button from "../../shared/components/FormElements/Button";
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../shared/util/validators";
 
 import './PlaceForm.css'
+import Card from "../../shared/components/UIElements/Card";
 
 const DUMMY_PLACES =[
     {
@@ -55,6 +56,7 @@ const UpdatePlace = props => {
     const identifiedPlace = DUMMY_PLACES.find(place => place.id === placeId)
 
     useEffect(()=>{
+    if(identifiedPlace){    
         setFormData({
             title:{
                 value: identifiedPlace.title,
@@ -65,7 +67,8 @@ const UpdatePlace = props => {
                 isValid: true
             }
         }
-    , true)    
+    , true)   
+    } 
     }, [setFormData, identifiedPlace])
 
 
@@ -77,7 +80,9 @@ const UpdatePlace = props => {
     if (!identifiedPlace){
         return (
             <div className="center">
-                <h2>Could not found this place!</h2>
+                <Card>
+                    <h2>Could not found this place!</h2>
+                </Card>
             </div>
         )
     }
