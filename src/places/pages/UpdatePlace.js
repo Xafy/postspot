@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import useForm from "../../shared/hooks/form-hook";
@@ -39,20 +39,35 @@ const DUMMY_PLACES =[
 
 const UpdatePlace = props => {
     const placeId = useParams().placeId
+    
+    const [formState, InputHandler, setFormData] = useForm({
+        title:{
+            value: '',
+            isValid: false
+        },
+        description:{
+            value: '',
+            isValid: false
+        }
+    }
+    , false)
 
     const identifiedPlace = DUMMY_PLACES.find(place => place.id === placeId)
 
-    const [formState, InputHandler] = useForm({
-        title:{
-            value: identifiedPlace.title,
-            isValid: true
-        },
-        description:{
-            value: identifiedPlace.description,
-            isValid: true
+    useEffect(()=>{
+        setFormData({
+            title:{
+                value: identifiedPlace.title,
+                isValid: true
+            },
+            description:{
+                value: identifiedPlace.title,
+                isValid: true
+            }
         }
-    }
-    , true)
+    , true)    
+    }, [setFormData, identifiedPlace])
+
 
     const updatePlaceSubmitHandler = event =>{
         event.preventDefault();
@@ -68,6 +83,7 @@ const UpdatePlace = props => {
     }
 
     return (
+        formState.inputs.title.value &&(
         <form className="place-form" onSubmit={updatePlaceSubmitHandler}>
             <Input
             id='title'
@@ -91,7 +107,7 @@ const UpdatePlace = props => {
             initialValid = {formState.inputs.description.isValid} 
             />
             <Button type='submit' disabled={!formState.isValid}>UPDATE SPOT</Button>
-        </form>
+        </form>)
     )
 }
 
