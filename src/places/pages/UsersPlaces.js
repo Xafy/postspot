@@ -31,6 +31,7 @@ const DUMMY_PLACES =[
         creator: 'u2'
     }
 ]
+
 const UsersPlaces = props =>{
     const userId = useParams().userId;
     const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId)
