@@ -7,6 +7,7 @@ import useForm from "../../shared/hooks/form-hook";
 import './PlaceForm.css'
 
 const NewPlace = () =>{
+    
     const [formState, InputHandler] = useForm({
         title: {
             value: '',
